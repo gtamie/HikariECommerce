@@ -1,15 +1,17 @@
 package com.lojavirtual.hikari.model;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,13 +33,17 @@ public class Produto {
 	
 	private String foto;
 	
-	@NotBlank(message = "O atributo preco é obrigatório e não aceita espaço em branco.")
-	private double preco;
+	@Range(min=0)
+	private float preco;
 	
 	
-	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
 
 	//GETTERS AND SETTERS
 	
@@ -73,11 +79,11 @@ public class Produto {
 		this.foto = foto;
 	}
 
-	public double getPreco() {
+	public float getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(float preco) {
 		this.preco = preco;
 	}
 
@@ -89,8 +95,14 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 }

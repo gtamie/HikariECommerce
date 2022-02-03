@@ -24,12 +24,16 @@ public class Usuario {
 	private long id;
 	
 	@NotBlank(message = "O atributo nome é obrigatório e não aceita espaços em branco")
-	@Size(min=2, max=100, message = "O nome deve conter de de 2 a 100 caracteres")
+	@Size(min=2, max=100, message = "O nome deve conter de 2 a 100 caracteres")
 	private String nome;
 	
 	@NotBlank(message = "O atributo usuario é obrigatório e não aceita espaços em branco")
 	@Email
 	private String usuario;
+	
+	@NotBlank(message = "O atributo senha é obrigatório e não aceita espaços em branco")
+	@Size(min=8, message = "O atributo senha deve conter no mínimo 8 caracteres")
+	private String senha;
 	
 	@Size(min = 10,max = 11, message = "O atributo telefone deve conter de de 10 a 11 caracteres")
 	private String telefone;
@@ -75,6 +79,14 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -90,7 +102,6 @@ public class Usuario {
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
-	
 	
 	
 	
